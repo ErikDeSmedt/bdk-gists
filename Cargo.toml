@@ -6,5 +6,6 @@ edition = "2021"
 [dependencies]
 bdk_bitcoind_rpc = "0.16.0"
 bdk_testenv = "0.10.0"
-bdk_wallet = "1.0.0-beta.5"
+bdk_wallet = {version ="1.0.0-beta.5", features=["rusqlite"]}
 bitcoin = "0.32.4"
+rusqlite = "0.31.0"
