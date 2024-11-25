@@ -98,6 +98,14 @@ fn detect_double_spend() {
     println!("- alice.list_transaction(): {:?}", alice.transactions().map(|t| t.chain_position).collect::<Vec<_>>());
     println!("- alice.balance: {:?}", alice.balance());
 
+    // We also add txb do the wallet
+    alice.apply_unconfirmed_txs([(tx1b.clone(), 101)]);
+    println!("After applying tx1b");
+    println!("- alice.list_unspent(): {:?}", alice.list_unspent().map(|o| o.outpoint).collect::<Vec<_>>());
+    println!("- alice.list_transaction(): {:?}", alice.transactions().map(|t| t.tx_node.txid).collect::<Vec<_>>());
+    println!("- alice.list_transaction(): {:?}", alice.transactions().map(|t| t.chain_position).collect::<Vec<_>>());
+    println!("- alice.balance: {:?}", alice.balance());
+
     // I expect list_unspent to be empty.
     // (tx1a) was double-spent
     assert_eq!(alice.list_unspent().collect::<Vec<_>>(), vec![]);
